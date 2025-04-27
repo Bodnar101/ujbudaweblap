@@ -1110,7 +1110,7 @@ section video{
     justify-content: start;
     width: 100%;
 }
-.büszketartalom section img, .büszketartalom section iframe{
+.büszketartalom section img{
     max-height: 250px;
     margin: 20px 10px;
     border-radius: 25px;
