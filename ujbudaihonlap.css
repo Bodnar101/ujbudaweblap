@@ -1,11 +1,56 @@
 *{
     margin: 0;
     padding: 0;
+    font-family: 'Times New Roman', Times, serif;
 }
+
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --textstrong-color: #333;
+    --gallery-bg: #f0f0f0;
+    --tabla-color: #77ff5fb4;
+}
+
+body.dark {
+    --bg-color: #252525;
+    --text-color: #ffffff;
+    --textstrong-color: #acacac;
+    --gallery-bg: #1e1e1e;
+    --tabla-color: #79ff6172;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.gallery {
+    background-color: #000;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: 2px solid var(--text-color);
+    color: var(--text-color);
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1000;
+    background-color: var(--bg-color);
+    transition: all 0.3s ease;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #ffff;
-    color: #333;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     margin: 0;
     padding: 0;
     height: 100%;
@@ -33,18 +78,17 @@ header.hidden {
     padding: 0;
     height: 0;
     transform: translateY(-100%); /* Elrejti a fejlécet felfelé */
-    transition: 1.5s;
 }
 header.hidden img{
     opacity: 0;
     padding: 0;
     height: 0;
     transform: translateY(-100%); /* Elrejti a fejlécet felfelé */
-    transition: 1s;
 }
 
 header span{
     font-size: 28px;
+    color: #333;
 }
 header .cim{
     font-size: 30px;
@@ -153,7 +197,7 @@ nav li{
     margin: 0 130px 50px 55px;
     display: grid;
     grid-template-rows: auto auto 45px;
-    grid-template-columns: 20% 43% 37%;
+    grid-template-columns: 20% 43% 33%;
 }
 
 .álandok{
@@ -169,6 +213,7 @@ nav li{
     gap: 25px;
     padding-top: 20px;
     height: max-content;
+    width: 425px;
 }
 .álandok span{
     position: relative;
@@ -180,19 +225,56 @@ nav li{
 .álandok a{
     position: relative;
     text-decoration: none;
-    color: black;
+    color: var(--text-color);
     left: 25px;
     padding: 8px;
     border-radius: 25px;
 }
 .álandok a:hover{
+    
     transition: 1s;
-    background-color: rgb(153, 255, 153);
+    background-color: var(--tabla-color);
     box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
     10px 10px 40px rgba(0, 0, 0, 0.25),
     inset 5px 5px 10px rgba(255, 255, 255, 0.25),
     inset -5px -5px 15px rgba(0, 0, 0, 0.75);
 }
+
+.letolthetomenu{
+    padding: 8px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+    display: flex; 
+}
+.letolthetomenu:hover{
+    transition: 1s;
+    background-color: var(--tabla-color);
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);   
+}
+.letolthetok a{
+    display: none;
+}
+.letolthetokmost.active .letolthetok a{
+    display: flex;
+}
+.letolthetok a pre{
+    font-family: Arial, sans-serif;
+}
+.letolthetokmost .letolthetomenu b{
+    position: relative;
+    transform: rotate(90deg);
+    transition: 1s;
+}
+.letolthetokmost.active .letolthetomenu b{
+    transform: rotate(0deg);
+}
+
+
 
 .képek{
     grid-row: 1 / 2;
@@ -202,6 +284,47 @@ nav li{
     height: 100%;
     width: 100%;
 }
+.részeiképek2{
+    position: relative;
+    display: flex;
+    top: -10%;
+
+}
+
+.szakmaképek{
+    width: 1400px;
+    position: absolute;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    left: 520px;
+}
+#img2{
+    transform: translateY(-170px);
+}
+#img1 , #img2{
+    z-index: 1;
+    height: 50%;
+    box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.25),
+    0px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 0px 5px 10px rgba(255, 255, 255, 0.25),
+    inset 0px -5px 15px rgba(0, 0, 0, 0.75);
+}
+.szakmaképek .képek {
+    transition: opacity 0.5s ease-in-out, transform 0.7s ease-in-out;
+    display: none;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  .szakmaképek .képek.active {
+    display: block;
+    opacity: 1;
+  }
+  
+
 
 .bal{
     position: relative;
@@ -241,15 +364,16 @@ nav li{
     margin: 0 15px 0 0;
 }
 
-.szoveg h1 {
-    text-align: center;
+p{
+    color: var(--text-color);
 }
+
 .szoveg p {
     text-align: justify;
     margin-bottom: 20px;
 }
 .szoveg strong {
-    color: #333;
+    color: var(--textstrong-color);
 }
 
 
@@ -258,14 +382,14 @@ nav li{
     margin: 25px 0;
     font-size: 1.1em;
     min-width: 76.5%;
-    border: 2px solid black;
+    border: 2px solid var(--text-color);
 }
 .tablepress_tablepress-id-20 td{
     padding: 12px 15px;
-    border: 2px solid #000000;
+    border: 2px solid var(--text-color);
 }
 .tablepress_tablepress-id-20 tr:hover td{
-    background-color: #cde5c8;
+    background-color: var(--tabla-color);
 }
 .tablepress_tablepress-id-20 tr:nth-of-type(even){
     background-color: #d4d4d480;
@@ -276,14 +400,14 @@ nav li{
     margin: 25px 0;
     font-size: 1em;
     min-width: 90%;
-    border: 2px solid black;
+    border: 2px solid var(--text-color);
 }
 .tablepress_tablepress-id-19 td{
     padding: 10px 13px;
-    border: 2px solid #000000;
+    border: 2px solid var(--text-color);
 }
 .tablepress_tablepress-id-19 tr:hover td{
-    background-color: #cde5c8;
+    background-color: var(--tabla-color);
 }
 .tablepress_tablepress-id-19 tr:nth-of-type(even){
     background-color: #d4d4d480;
@@ -294,15 +418,8 @@ nav li{
     text-decoration: none;
     font-size: 25px;
 }
-.táblázatok h1{
-    font-size: 3em;
-    color: green;
-    padding-bottom: 10px;
-}
-.entry-content h3{
-    font-size: 1.7em;
-    color: green;
-}
+
+
 
 
 
@@ -315,7 +432,7 @@ nav li{
     margin: 25px 0;
     font-size: 1.1em;
     min-width: 95%;
-    border: 2px solid black;
+    border: 2px solid var(--text-color);
 }
 .tablepress_tablepress-id-21 thead{
     padding: 15% 35%;
@@ -329,10 +446,10 @@ nav li{
 }
 .tablepress_tablepress-id-21 td{
     padding: 2% 1%;
-    border: 2px solid #000000;
+    border: 2px solid var(--text-color);
 }
 .tablepress_tablepress-id-21 tr:hover td{
-    background-color: #cde5c8;
+    background-color: var(--tabla-color);
 }
 .tablepress_tablepress-id-21 tr:nth-of-type(even){
     background-color: #d4d4d480;
@@ -344,29 +461,13 @@ nav li{
     text-decoration: none;
     font-size: 25px;
 }
-.beosztástáblázat h1{
-    font-size: 3em;
-    color: green;
-    padding-bottom: 10px;
-}
-.entry-content h3{
-    font-size: 1.7em;
-    color: green;
-}
 
 
 
 
 
-.elökészítőévfolyam h1{
-    font-size: 3em;
-    color: green;
-    padding-bottom: 24px;
-}
-.elökészítőévfolyam p{
-    font-size: 23px;
-    padding-bottom: 12px;
-}
+
+
 
 
 
@@ -387,6 +488,34 @@ nav li{
     overflow: hidden; /* Ne engedj görgetést az oldalon */
     position: relative;
     top: -70px;
+}
+
+#pdfViewer{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+#showPdfButton{
+    z-index: 2;
+    position: fixed;
+    top: 300px;
+    left: 70px;
+    width: auto;
+    padding: 8px;
+    width: 150px;
+    height: 100px;
+    cursor: pointer;
+    display: grid;
+    border-radius: 100%;
+    color: var(--text-color);
+    background: var(--bg-color);
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+    justify-content: center;
+    align-items: center;  
 }
 
 .itemkep {
@@ -431,35 +560,17 @@ nav li{
     width: 100%;
 }
 
-.felvételi_tájékoztató h1{
-    color: green;
-    font-size: 2em;
-    margin-bottom: 24px;
-}
 
-.felvételi_tájékoztató2 h3{
-    margin-top: 36px;
-    color: green;
-    font-size: 3em;
-    margin-bottom: 24px;
-}
 
-.felvételi_tájékoztató p{
-    margin-bottom: 12px;
-    font-size: 23px;
-}
 
-.felvételi_tájékoztató2 a{
+
+
+.bal a{
     color: green;
 }
 
 
-.felvételi_tájékoztató_tábla h3{
-    margin-top: 36px;
-    color: green;
-    font-size: 2em;
-    margin-bottom: 24px;
-}
+
 
 .felvételi_tájékoztató_tábla .tablepress_tablepress-id-22,
 .tablepress_tablepress-id-17_dataTable_no-footer,
@@ -468,7 +579,7 @@ nav li{
     margin: 25px 0;
     font-size: 1em;
     min-width: 90%;
-    border: 2px solid black;
+    border: 2px solid var(--text-color);
 }
 
 .felvételi_tájékoztató_tábla .tablepress_tablepress-id-22 thead th,
@@ -486,13 +597,13 @@ nav li{
 .tablepress_tablepress-id-17_dataTable_no-footer td,
 .tablepress_tablepress-id-18_dataTable_no-footer td{
     padding: 10px 13px;
-    border: 2px solid #000000;
+    border: 2px solid var(--text-color);
     font-size: 110%;
 }
 .felvételi_tájékoztató_tábla .tablepress_tablepress-id-22 tr:hover td,
 .tablepress_tablepress-id-17_dataTable_no-footer tr:hover td,
 .tablepress_tablepress-id-18_dataTable_no-footer tr:hover td{
-    background-color: #cde5c8;
+    background-color: var(--tabla-color);
 }
 .felvételi_tájékoztató_tábla .tablepress_tablepress-id-22 tr:nth-of-type(even),
 .tablepress_tablepress-id-17_dataTable_no-footer tr:nth-of-type(even),
@@ -500,12 +611,281 @@ nav li{
     background-color: #d4d4d480;
 }
 
-.hirek title,.fényképek title,.videók title,.büszkeségeink title{
-    color: black;
+
+
+.hirekkocka{
+    margin-bottom: 12px;
+    height: auto;
+    width: auto;
+    padding: 20px;
+    transition: 0.7s ease-in-out;
+}
+
+.hirekkocka:hover{
+    color: white;
+    border-radius: 50px;
+    background-color: green;
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+}
+.hirekkocka p{
+    color: var(--text-color);
+}
+.hirekkocka:hover p{
+    color: white;
+}
+.hirek a{
+    text-decoration: none;
+}
+.hirekkocka:hover h3{
+    color: white;
+    text-decoration: solid;
+}
+
+
+
+.igazgatoikoszonto p{
+    display: grid;
     position: relative;
-    top: 50%;
-    left: 50%;
+    margin-bottom: 12px;
+    font-family: Bookman Old Style, serif;
+}
+.igazgatoikoszonto img{
+    position: relative;
+    top: 25px;
+    float: left;
+    margin: 0 15px 0 0;
+}
+
+.bucsunyugdijba p{
+    display: grid;
+    position: relative;
+    margin-bottom: 12px;
+}
+.bucsunyugdijba img{
+    position: relative;
+    float: left;
+    margin: 0 15px 0 0;
+}
+.bucsunyugdijba li{
+    position: relative;
+    left: 25px;
+    font-size: medium;
+}
+.tajekoztatotanuloi{
+    transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.hirdetésekh.active{
+    display: none;
+    opacity: 0;
+}
+.hirdetésekh{
+    display: flex;
+    opacity: 1;
+}
+
+
+
+
+
+.fényképek{
+    position: relative;
+    text-align: center;
+    background-color: #333;
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+    z-index: 3;
+    width: 150%;
+    height: auto;
+    padding-top: 20px;
+    border-radius: 25px;
+    margin-bottom: 25px;
+}
+
+.albumképek{
+    z-index: 10;
+    position: fixed;
+    top: 200px;
+    left: 15px;
+    width: auto;
+    padding: 8px;
+    width: 150px;
+    height: 100px;
+    cursor: pointer;
+    display: grid;
+    border-radius: 100%;
+    color: white;
+    background-color: #333;
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+    justify-content: center;
+    align-items: center;   
+}
+
+
+.albumképek:hover{
+    transition: 1s;
+    background-color: var(--tabla-color);
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);   
+}
+
+
+.albumképekfel{
+    z-index: 2;
+    position: fixed;
+    bottom: 100px;
+    left: 15px;
+    width: auto;
+    padding: 8px;
+    width: 150px;
+    height: 100px;
+    cursor: pointer;
+    display: grid;
+    border-radius: 100%;
+    color: white;
+    background-color: #af2a2a;
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+    justify-content: center;
+    align-items: center;   
+}
+
+
+.albumképekfel:hover{
+    transition: 1s;
+    background-color: var(--tabla-color);
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);   
+}
+
+
+.fényképek .albumképek li ul{
+    position: absolute;
+    width: 700px;
+    display: none;
+    border-radius: 0;
+    top: -150px;
+    padding: 10px;
+    left: 200px;
+    transition: 10s ease-in-out;
+}
+.fényképek .albumképek.active li ul{
     display: block;
+    background-color: #333;
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);   
+    border-radius: 25px;
+}
+.fényképek .albumképek li ul li a{
+    width: 650px;
+    position: relative;
+    display: flex;
+    font-size: 1.3em;
+    left: 10px;
+    text-decoration: none;
+    font-weight: 200;
+    padding: 6px;
+    border-radius: 20px;
+}
+.fényképek .albumképek li ul li a:hover{
+    color: #333;
+    font-weight: 800;
+    text-decoration: double;
+    transition: 1s;
+    background-color: rgb(153, 255, 153);
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);   
+}
+.fényképek section{
+    position: relative;
+    padding-left: 70px;
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: column;    
+    padding-bottom: 35px;
+}
+.fényképek section h3{
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 50px;
+    box-shadow: 0 0 20px #000;
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #fff;
+    font-size: 40px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 60px;
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+    padding: 20px;
+    z-index: 1001;
+}
+
+.prev {
+    left: 20px;
+}
+
+.next {
+    right: 20px;
 }
 
 
@@ -513,6 +893,282 @@ nav li{
 
 
 
+.gallery div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.gallery div img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.gallery div h3{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+}
+.gallery{
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    grid-auto-rows: 230px;
+    grid-auto-flow: dense;
+}
+
+.gallery section img{
+    height: 100%;
+    width: auto;
+    vertical-align: middle;
+    display: inline-block;
+    transition: 1s;
+    margin: 50px;
+    background-color: #000000;
+}
+.gallery div img{
+    transition: 0.5s;
+}
+.gallery div:hover img{
+    height: 120%;
+    width: auto;
+    z-index: 5;
+    margin: 100%;
+    border-radius: 15px;
+}
+.gallery .wide{
+    grid-column: span 2;
+}
+.gallery .tall{
+    grid-row: span 2;
+}
+.gallery .big{
+    grid-column: span 2;
+    grid-row: span 2;
+}
+.gallery .bigbig{
+    grid-column: span 3;
+    grid-row: span 2;
+}
+.gallery .egy{
+    grid-column: span 3;
+    grid-row: span 3;
+}
+
+section video{
+    padding: 20px 0;
+    position: relative;
+    width: 100%;
+}
+
+
+
+.iskolavideo{
+    display: flex;
+    justify-content: center;
+}
+.iskolavideo iframe{
+    position: relative;
+    height: 400px;
+    width: 70%;
+}
+
+
+
+.fényképek{
+    position: relative;
+    text-align: center;
+    background-color: #333;
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+    z-index: 3;
+    width: 150%;
+    height: auto;
+    padding-top: 20px;
+    border-radius: 25px;
+    margin-bottom: 25px;
+}
+
+#büszkeségeink{
+    position: relative;
+    left: -180px;
+    width: 180%;
+    background: var(--bg-color);
+}
+
+.büszkeségbody{
+    position: relative;
+    
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    z-index: 10;
+
+    padding: 20px 80px 20px 20px;
+    border-radius: 25px;
+    background-color: var(--bg-color);
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+}
+.büszkeségeink{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.büszkeségeinkmenü{
+    flex: 1;
+    max-width: 300px;
+}
+.büszkeségeinkmenü .büszkeségeinkgallery .büszkeség li ul li a{
+    gap: 10px;
+    width: 100%;
+    display: block;
+    margin: 5px 0;
+    cursor: pointer;
+    font-weight: 200;
+    padding: 20px;
+    border-radius: 25px;
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+    transition: 1s;
+    font: 200;
+}
+.büszkeségeinkmenü .büszkeségeinkgallery .büszkeség li ul li a:hover{
+    background: var(--tabla-color);
+    color: var(--text-color);
+}
+.büszkeség a.active {
+    font-weight: bold;
+    background: var(--tabla-color);
+    color: #000;
+    font-weight: 800;
+}
+.büszketartalom{
+    flex: 4;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 10px;
+}
+.büszketartalom h1{
+    height: auto;
+    max-height: 50px;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+.büszketartalom section{
+    flex: 100%;
+    border-radius: 25px;
+    margin-bottom: 30px;
+    padding: 20px 10px 20px 10px;
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+}
+.büszketartalom .cím{
+    flex: 1;
+    max-height: 50px;
+    display: flex;
+}
+.büszketartalom section .fejezetképek{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+}
+
+.fejezetek p{
+    position: relative;
+    width: 90%;
+    left: 4%;
+
+}
+.fejezetek h4{
+    font-size: 2em;
+    color: green;
+    margin-bottom: 10px;
+}
+.fejezetek .középreigazit{
+    position: relative;
+    display: grid;
+    justify-content: center;
+    width: 100%;
+}
+.fejezetek .középreigazit p {
+    position: relative;
+    display: flex;
+    justify-content: start;
+    width: 100%;
+}
+.büszketartalom section img, iframe{
+    max-height: 250px;
+    margin: 20px 10px;
+    border-radius: 25px;
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+}
+.büszketartalom div img:hover{
+    color: rgb(0, 0, 0, 0.25);
+}
+
+
+.büszkeség input{
+    color: var(--text-color);
+    font-size: 2em;
+    background: var(--bg-color);
+    border-radius: 25px;
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.bal h1{
+    color: green;
+    font-size: 3.3em;
+    margin-bottom: 24px;
+}
+
+.bal h2{
+    color: green;
+    font-size: 2em;
+    margin-bottom: 24px;
+}
+
+.bal h3{    
+    font-size: 2.2em;
+    color: green;
+    margin-bottom: 24px;
+}
+
+
+.bal p{
+    font-size: 23px;
+    padding-bottom: 12px;
+}
 
 
 
@@ -533,6 +1189,7 @@ body.active {
 
 
 
+
 #preloader {
     position: fixed;
     width: 100%;
@@ -548,11 +1205,49 @@ body.active {
     max-width: 150px; /* GIF mérete */
 }
 
-#content {
-    display: none; /* Amíg nem tölt be, ne jelenjen meg az oldal */
+/* képek betöltése*/
+.spinneres-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.spinneres-wrapper img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.spinneres-wrapper .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top: 5px solid var(--tabla-color);
+    border-radius: 50%;
+    animation: spinneres-spin 1s linear infinite;
+    z-index: 10;
+    pointer-events: none;
+}
+
+@keyframes spinneres-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 
+  
+  
+  
+
+
+
+
+#content {
+    display: none; /* Amíg nem tölt be, ne jelenjen meg az oldal */
+}
 
 .content {
     display: none;
@@ -560,6 +1255,193 @@ body.active {
 .content.active {
     display: block;
 }
+
+
+
+
+
+
+.kapcsolat{
+    gap: 10px;
+    position: relative;
+    font-size: 20px;
+}
+
+.kapcsolat a{
+    color: var(--text-color);   
+    text-decoration: none;
+    padding: 5px;
+    padding-left: 10px;
+    position: relative;
+    display: flex;
+    border-radius: 15px;
+}
+.kapcsolat a:hover{
+    background-color: green;
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+}
+
+.kapcsolat .faceboklogo a:hover{
+
+    background-color: blue;
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+}
+.kapcsolat .tiklogo a:hover{
+
+    background-color: black;
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+}
+.kapcsolat .instlogo a:hover{
+
+    background: linear-gradient(45deg, #ffe943, #ff6acd );
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+}
+.kapcsolat .youlogo a:hover{
+
+    background-color: red;
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+}
+
+.kapcsolat a .icon{
+    height: auto;
+    width: auto;
+    position: absolute;
+    transform: translateX(-60px);
+    color: var(--tabla-color);
+    background-color: var(--bg-color);
+}
+.hidden {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  
+  .visible {
+    opacity: 1;
+  }
+
+.kapcsolat .navigate{
+    top: -15px;
+    color: green;
+    font-size: large;
+    font-weight: 800;
+    height: 45px;
+    width: 45px;
+    background-color: var(--bg-color);
+    position: absolute;
+    z-index: -1;
+    border-radius: 100%;
+}
+.kapcsolat a:hover .navigate{
+    color: red;
+    background-color: #fff;
+}
+
+.kapcsolat .mail{
+    top: -12px;
+    color: red;
+    background: white;
+    height: 40px;
+    width: 45px;
+
+    position: absolute;
+    z-index: -1;
+    border-radius: 30%;
+}
+
+
+.kapcsolat .facelogo{
+    color: blue;
+    background-color: white;
+    border-radius: 110%;
+    padding: 2%;
+    position: relative;
+    top: -15px;
+    z-index: -1;
+}
+
+.kapcsolat .tiktoklogo{
+    color: white;
+    background-color: black;
+    border-radius: 100%;
+    padding: 12%;
+    font-size: 0.9em;
+    position: relative;
+    top: -18px;
+    left: -2px;
+    z-index: -1;
+}
+
+.kapcsolat .intalogo{
+    background: linear-gradient(45deg, #ffe943, #ff6acd );
+    color: white;
+    border-radius: 30%;
+    padding: 2%;
+    position: relative;
+    top: -15px;
+    z-index: -1;
+}
+
+.kapcsolat .yutubelogo{
+    color: red;
+    padding: 7%;
+    top: -15px;
+    left: -5px;
+    position: relative;
+    border-radius: 20%;
+    z-index: -1;
+}
+.kapcsolat .yutubelogo::after{
+    content: '';
+    height: 45px;
+    width: 58px;
+    background-color: white;
+    top: 6px;
+    left: 0px;
+    position: absolute;
+    z-index: -2;
+    border-radius: 20%;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -653,7 +1535,7 @@ body.active {
     transform: translateX(-60px);
 }
 
-.navigate{
+.lábrészhelypoz .navigate{
     top: -15px;
     color: red;
 
@@ -665,7 +1547,7 @@ body.active {
     border-radius: 100%;
 }
 
-.mail{
+.lábrészhelypoz .mail{
     top: -12px;
     color: red;
     background: white;
@@ -678,7 +1560,7 @@ body.active {
 }
 
 
-.facelogo{
+.lábrészhelypoz .facelogo{
     color: blue;
     background-color: white;
     border-radius: 110%;
@@ -688,7 +1570,7 @@ body.active {
     z-index: -1;
 }
 
-.tiktoklogo{
+.lábrészhelypoz .tiktoklogo{
     color: white;
     background-color: black;
     border-radius: 100%;
@@ -700,7 +1582,7 @@ body.active {
     z-index: -1;
 }
 
-.intalogo{
+.lábrészhelypoz .intalogo{
     background: linear-gradient(45deg, #ffe943, #ff6acd );
     color: white;
     border-radius: 30%;
@@ -710,7 +1592,7 @@ body.active {
     z-index: -1;
 }
 
-.yutubelogo{
+.lábrészhelypoz .yutubelogo{
     color: red;
     padding: 7%;
     top: -15px;
@@ -719,7 +1601,7 @@ body.active {
     border-radius: 20%;
     z-index: -1;
 }
-.yutubelogo::after{
+.lábrészhelypoz .yutubelogo::after{
     content: '';
     height: 45px;
     width: 58px;
@@ -746,6 +1628,7 @@ body.active {
 
 
 @media screen and (max-width: 1920px) {
+
     .egész{
         position: relative;
         height: auto;
@@ -754,4 +1637,33 @@ body.active {
         grid-template-rows: auto auto 45px;
         grid-template-columns: 10% 57% 33%;
     }
+
+    .Kezdőlap .részei img{
+        position: relative;
+        display: flex;
+        height: 200px;
+    }
+
+
+
+    .szakmaképek{
+        width: 1100px;
+        position: absolute;
+        display: block;
+        align-items: center;
+        justify-content: center;
+        left: 350px;
+    }
+    #img2{
+        transform: translateY(-125px);
+    }
+    #img1 , #img2{
+        height: 50%;
+    }
+    
+
+    .részeiképek2{
+        max-width: 250px;
+    }
+
 }
