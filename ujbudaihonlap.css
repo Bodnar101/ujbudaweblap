@@ -610,8 +610,29 @@ p{
 .tablepress_tablepress-id-18_dataTable_no-footer tr:nth-of-type(even){
     background-color: #d4d4d480;
 }
-
-
+.szakmai_képzéseinkhez_kapcsolodo{
+    display: grid;
+    position: relative;
+    gap: 10px;
+}
+.szakmai_képzéseinkhez_kapcsolodo a{
+    font-size: 1.5em;
+    position: relative;
+    text-decoration: none;
+    color: var(--text-color);
+    left: 25px;
+    padding: 8px;
+    border-radius: 25px;
+}
+.szakmai_képzéseinkhez_kapcsolodo a:hover{
+    color: var(--text-color);
+    transition: 1s;
+    background-color: var(--tabla-color);
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+}
 
 .hirekkocka{
     margin-bottom: 12px;
@@ -644,6 +665,26 @@ p{
     text-decoration: solid;
 }
 
+#tajekoztato-a-tanuloi-jogviszony-igazolasokrol-es-a-diakigazolvanyokrol .vissza{
+    text-decoration: none;
+    font-size: 1.4em;
+    padding: 25px;
+    border-radius: 20px;
+    position: absolute;
+    left: -170px;
+    display: block;
+    height: auto;
+    width: auto;
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+    transition: 0.5s;
+    z-index: 2;
+}
+#tajekoztato-a-tanuloi-jogviszony-igazolasokrol-es-a-diakigazolvanyokrol .vissza:hover{
+    background-color: var(--tabla-color);
+}
 
 .vissza{
     text-decoration: none;
@@ -664,12 +705,47 @@ p{
 .vissza:hover{
     background-color: var(--tabla-color);
 }
+
 .igazgatoikoszonto p{
     display: grid;
     position: relative;
     margin-bottom: 12px;
     font-family: Bookman Old Style, serif;
 }
+
+.archivumkocka{
+    margin-bottom: 12px;
+    height: auto;
+    width: auto;
+    padding: 20px;
+    transition: 0.7s ease-in-out;
+}
+
+.archivumkocka:hover{
+    color: white;
+    border-radius: 50px;
+    background-color: green;
+    box-shadow: 25px 25px 45px rgba(0, 0, 0, 0.25),
+    10px 10px 40px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.25),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+}
+.archivumkocka p{
+    color: var(--text-color);
+}
+.archivumkocka:hover p{
+    color: white;
+}
+.archivum a{
+    text-decoration: none;
+}
+.archivumkocka:hover h3{
+    color: white;
+    text-decoration: solid;
+}
+
+
+
 .igazgatoikoszonto img{
     position: relative;
     top: 25px;
@@ -1317,8 +1393,8 @@ body.active {
     padding: 0;
 }
 .kapcsolat1 .egy p{
-    padding: 2px;
-    margin: 2px;
+    padding: 0;
+    margin: 0;
     padding-left: 20px;
 }
 .kapcsolat1 .egy p1{
@@ -1328,6 +1404,7 @@ body.active {
 }
 .kapcsolat1 a{
     text-decoration: none;
+    padding: 4px 0;
 }
 .kapcsolat1 p ,
 .kapcsolat1 p1,
